@@ -13,12 +13,6 @@ async def get_db():
     async with AsyncSessionLocal() as session:
         yield session
 
-
-@app.get("/api/article/like-count/all")
-async def get_like_count(articleId: str, db: AsyncSession = Depends(get_db)):
-    article = await db.execute(select(Article).fetch())
-    return {"likes": article}
-
 # Endpoint to get like count for an article
 @app.get("/api/article/like-count")
 async def get_like_count(articleId: str, db: AsyncSession = Depends(get_db)):
